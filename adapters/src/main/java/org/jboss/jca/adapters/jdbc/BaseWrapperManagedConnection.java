@@ -26,7 +26,16 @@ import org.jboss.jca.adapters.jdbc.spi.reauth.ReauthPlugin;
 import org.jboss.jca.adapters.jdbc.util.ReentrantLock;
 import org.jboss.jca.core.spi.transaction.ConnectableResource;
 import org.jboss.jca.core.spi.transaction.ConnectableResourceListener;
+import org.jboss.logging.Logger;
 
+import javax.resource.ResourceException;
+import javax.resource.spi.ConnectionEvent;
+import javax.resource.spi.ConnectionEventListener;
+import javax.resource.spi.ConnectionRequestInfo;
+import javax.resource.spi.ManagedConnection;
+import javax.resource.spi.ManagedConnectionMetaData;
+import javax.resource.spi.ResourceAdapterInternalException;
+import javax.security.auth.Subject;
 import java.io.PrintWriter;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -42,17 +51,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import javax.resource.ResourceException;
-import javax.resource.spi.ConnectionEvent;
-import javax.resource.spi.ConnectionEventListener;
-import javax.resource.spi.ConnectionRequestInfo;
-import javax.resource.spi.ManagedConnection;
-import javax.resource.spi.ManagedConnectionMetaData;
-import javax.resource.spi.ResourceAdapterInternalException;
-import javax.security.auth.Subject;
-
-import org.jboss.logging.Logger;
 
 /**
  * BaseWrapperManagedConnection
@@ -349,6 +347,14 @@ public abstract class BaseWrapperManagedConnection implements ManagedConnection,
       synchronized (stateLock)
       {
          jdbcAutoCommit = true;
+         if (!underlyingAutoCommit) {
+            try {
+               con.setAutoCommit(true);
+               underlyingAutoCommit = true;
+            } catch (SQLException e) {
+               mcf.log.warn("Error resetting auto commit state ", e);
+            }
+         }
          jdbcReadOnly = readOnly;
          if (jdbcTransactionIsolation != transactionIsolation)
          {
