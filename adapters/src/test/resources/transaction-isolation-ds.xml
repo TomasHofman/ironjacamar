@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://www.jboss.org/jee/schema/ironjacamar/datasources_1_0.xsd">
+   <datasource jndi-name="java:/H2DS" pool-name="H2DS">
+      <connection-url>jdbc:test:test</connection-url>
+      <driver-class>org.jboss.jca.adapters.jdbc.unit.support.transactionisolation.TransactionTestDriver</driver-class>
+
+<!--
+      <connection-url>jdbc:postgresql://localhost:5432/jboss</connection-url>
+      <driver-class>org.postgresql.Driver</driver-class>
+      <security>
+         <user-name>postgres</user-name>
+         <password>postgres</password>
+      </security>
+-->
+
+      <pool>
+         <min-pool-size>1</min-pool-size>
+         <max-pool-size>1</max-pool-size>
+         <prefill>true</prefill>
+         <use-strict-min>true</use-strict-min>
+      </pool>
+      <validation>
+         <check-valid-connection-sql>select 1</check-valid-connection-sql>
+         <validate-on-match>true</validate-on-match>
+      </validation>
+   </datasource>
+</datasources>
