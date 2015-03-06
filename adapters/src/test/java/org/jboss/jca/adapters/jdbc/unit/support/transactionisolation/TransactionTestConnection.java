@@ -44,7 +44,12 @@ public class TransactionTestConnection extends TestConnection {
 
    @Override
    public void setAutoCommit(boolean autocommit) throws SQLException {
-      this.autocommit = autocommit;
+      if (this.autocommit != autocommit) {
+         if (!this.autocommit) { // see org.postgresql.jdbc2.AbstractJdbc2Connection#setAutoCommit(boolean)
+            commit();
+         }
+         this.autocommit = autocommit;
+      }
    }
 
    @Override

@@ -24,12 +24,7 @@ package org.jboss.jca.adapters.jdbc;
 
 import org.jboss.jca.core.spi.transaction.TransactionTimeoutConfiguration;
 import org.jboss.jca.core.spi.transaction.TxUtils;
-
-import java.io.PrintWriter;
-import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.SQLFeatureNotSupportedException;
+import org.jboss.logging.Logger;
 
 import javax.naming.Reference;
 import javax.resource.Referenceable;
@@ -39,8 +34,11 @@ import javax.resource.spi.ConnectionRequestInfo;
 import javax.sql.DataSource;
 import javax.transaction.RollbackException;
 import javax.transaction.Status;
-
-import org.jboss.logging.Logger;
+import java.io.PrintWriter;
+import java.io.Serializable;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.SQLFeatureNotSupportedException;
 
 /**
  * WrapperDataSource
@@ -139,6 +137,7 @@ public class WrapperDataSource extends JBossWrapper implements Referenceable, Da
          wc.setDataSource(this);
          wc.setSpy(mcf.getSpy().booleanValue());
          wc.setJndiName(mcf.getJndiName());
+         wc.checkTransaction(); // BZ-1195079 - propagates default autocommit to jdbc connection
          return wc;
       }
       catch (ResourceException re)
