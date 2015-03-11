@@ -137,7 +137,7 @@ public class WrapperDataSource extends JBossWrapper implements Referenceable, Da
          wc.setDataSource(this);
          wc.setSpy(mcf.getSpy().booleanValue());
          wc.setJndiName(mcf.getJndiName());
-         wc.checkTransaction(); // BZ-1195079 - propagates default autocommit to jdbc connection
+//         wc.checkTransaction(); // BZ-1195079 - propagates default autocommit to jdbc connection
          return wc;
       }
       catch (ResourceException re)

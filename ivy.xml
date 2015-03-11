@@ -111,6 +111,9 @@
     <dependency org="com.github.fungal" name="fungal" rev="${version.fungal}" conf="sjc,ironjacamar-depchain,ironjacamar-deployers-fungal,ironjacamar-embedded"/>
     <dependency org="com.github.fungal" name="fungal-cli" rev="${version.fungal}" conf="sjc,ironjacamar-depchain"/>
     <dependency org="com.h2database" name="h2" rev="${version.h2}" conf="test"/>
+    <dependency org="org.postgresql" name="postgresql" rev="9.4-1201.jdbc41" conf="test"/>
+    <dependency org="com.oracle" name="ojdbc6" rev="11.2.0.4" conf="test"/>
+     <!--<dependency org="org.firebirdsql.jdbc" name="jaybird-jdk17" rev="2.2.7" conf="test"/>-->
 <!--    <dependency org="com.sun.codemodel" name="codemodel" rev="2.4" conf="tools"/> -->
     <dependency org="com.sun.xml.dtd-parser" name="dtd-parser" rev="${version.dtd-parser}" conf="tools"/>
     <dependency org="dom4j" name="dom4j" rev="${version.dom4j}" conf="jetty,tools"/>

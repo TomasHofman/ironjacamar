@@ -2,29 +2,13 @@
 <datasources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:noNamespaceSchemaLocation="http://www.jboss.org/jee/schema/ironjacamar/datasources_1_0.xsd">
    <datasource jndi-name="java:/H2DS" pool-name="H2DS">
-      <connection-url>jdbc:test:test</connection-url>
-      <driver-class>org.jboss.jca.adapters.jdbc.unit.support.transactionisolation.TransactionTestDriver</driver-class>
 
-      <!--<connection-url>jdbc:postgresql://localhost:5432/jboss</connection-url>
+      <connection-url>jdbc:postgresql://localhost:5432/jboss</connection-url>
       <driver-class>org.postgresql.Driver</driver-class>
       <security>
          <user-name>postgres</user-name>
          <password>postgres</password>
-      </security>-->
-
-      <!--<connection-url>jdbc:oracle:thin:@//localhost:1521/XE</connection-url>
-      <driver-class>oracle.jdbc.OracleDriver</driver-class>
-      <security>
-         <user-name>test</user-name>
-         <password>test</password>
-      </security>-->
-
-      <!--<connection-url>jdbc:firebirdsql:localhost:/tmp/test2.fdb</connection-url>
-      <driver-class>org.firebirdsql.jdbc.FBDriver</driver-class>
-      <security>
-         <user-name>SYSDBA</user-name>
-         <password>masterkey</password>
-      </security>-->
+      </security>
 
       <pool>
          <min-pool-size>1</min-pool-size>

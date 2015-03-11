@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://www.jboss.org/jee/schema/ironjacamar/datasources_1_0.xsd">
+   <datasource jndi-name="java:/H2DS" pool-name="H2DS">
+
+      <connection-url>jdbc:oracle:thin:@//localhost:1521/XE</connection-url>
+      <driver-class>oracle.jdbc.OracleDriver</driver-class>
+      <security>
+         <user-name>test</user-name>
+         <password>test</password>
+      </security>
+
+      <pool>
+         <min-pool-size>1</min-pool-size>
+         <max-pool-size>1</max-pool-size>
+         <prefill>true</prefill>
+         <use-strict-min>true</use-strict-min>
+      </pool>
+      <validation>
+         <check-valid-connection-sql>insert into test values(1)</check-valid-connection-sql>
+         <validate-on-match>true</validate-on-match>
+      </validation>
+   </datasource>
+</datasources>
