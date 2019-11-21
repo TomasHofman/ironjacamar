@@ -337,6 +337,9 @@ public abstract class BaseWrapperManagedConnection implements ManagedConnection,
          {
             WrappedConnection lc = i.next();
             lc.setManagedConnection(null);
+            // JBJCA-1396 notify ConnectionEventListeners that handle has been closed so that connections can be
+            // properly unregistered
+            closeHandle(lc);
          }
          handles.clear();
       }
